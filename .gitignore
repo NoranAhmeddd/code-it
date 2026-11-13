@@ -1,0 +1,17 @@
+# Node / frontend
+node_modules/
+dist/
+.env
+.env.local
+
+# Go / backend
+*.exe
+*.test
+*.out
+bin/
+vendor/
+
+# Editors & OS
+.vscode/
+.idea/
+.DS_Store
