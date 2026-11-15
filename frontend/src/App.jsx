@@ -4,7 +4,6 @@ import { AppProvider } from './context/AppContext';
 import MainLayout from './layouts/MainLayout';
 
 // Lazy load all pages for optimal bundle and load performance
-const LandingPage = lazy(() => import('./pages/LandingPage'));
 const StudentDashboard = lazy(() => import('./pages/StudentDashboard'));
 const ProblemsPage = lazy(() => import('./pages/ProblemsPage'));
 const ProblemDetailPage = lazy(() => import('./pages/ProblemDetailPage'));
@@ -37,14 +36,10 @@ function PageLoader() {
 }
 
 const router = createBrowserRouter([
-  // Public Landing Page (with its own clean header & footer)
+  // Open the dark competitive dashboard by default.
   {
     path: '/',
-    element: (
-      <Suspense fallback={<PageLoader />}>
-        <LandingPage />
-      </Suspense>
-    ),
+    element: <Navigate to="/dashboard" replace />,
   },
 
   // Main Authenticated Application Routes (inside MainLayout)
