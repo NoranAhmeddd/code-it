@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useApp } from '../context/AppContext';
 
 const VERDICTS = [
   { verdict: 'AC', weight: 60 },
@@ -17,6 +18,7 @@ function pickVerdict() {
 }
 
 export function useSubmission() {
+  const { addSubmission, currentUser } = useApp() || {};
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [lastSubmission, setLastSubmission] = useState(null);
@@ -30,6 +32,8 @@ export function useSubmission() {
     const verdict = pickVerdict();
     const sub = {
       id: `sub-${Date.now()}`,
+      userId: currentUser?.id || 'u1',
+      username: currentUser?.username || 'tourist',
       problemId,
       problemTitle,
       verdict,
@@ -42,9 +46,12 @@ export function useSubmission() {
     };
     setLastSubmission(sub);
     setSubmissionHistory(prev => [sub, ...prev]);
+    if (addSubmission) {
+      addSubmission(sub);
+    }
     setIsSubmitting(false);
     return sub;
-  }, []);
+  }, [addSubmission, currentUser]);
 
   const runCode = useCallback(async (problemId, code, language, customInput = '') => {
     setIsRunning(true);

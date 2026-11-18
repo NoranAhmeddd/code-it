@@ -22,6 +22,8 @@ const TeacherAssignmentsPage = lazy(() => import('./pages/TeacherAssignmentsPage
 const TeacherStudentsPage = lazy(() => import('./pages/TeacherStudentsPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const ClassroomPage = lazy(() => import('./pages/ClassroomPage'));
+const BlogsPage = lazy(() => import('./pages/BlogsPage'));
+const ContributePage = lazy(() => import('./pages/ContributePage'));
 
 // Fallback Loading Screen
 function PageLoader() {
@@ -131,6 +133,30 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <RankingsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/blogs',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <BlogsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/blogs/:id',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <BlogsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/contribute',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ContributePage />
           </Suspense>
         ),
       },

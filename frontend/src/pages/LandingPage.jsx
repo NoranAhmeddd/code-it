@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import mockData from '../data/mockData';
+import { getCountryFlag } from '../data/countries';
 import { getRatingColor } from '../utils/helpers';
 import { useApp } from '../context/AppContext';
 
@@ -206,7 +207,10 @@ export default function LandingPage() {
                         >
                           {u.username}
                         </Link>
-                        <span className="text-gray-500 text-[10px] ml-1">({u.country})</span>
+                        <span className="text-gray-500 text-[11px] ml-2 inline-flex items-center gap-1">
+                          <span>{getCountryFlag(u.country)}</span>
+                          <span>{u.country}</span>
+                        </span>
                       </td>
                       <td className="font-mono font-bold text-gray-800">{u.rating}</td>
                     </tr>

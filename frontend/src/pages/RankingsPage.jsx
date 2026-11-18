@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import mockData from '../data/mockData';
+import { getCountryFlag } from '../data/countries';
 import { getRatingColor } from '../utils/helpers';
 import { Search, Trophy } from 'lucide-react';
 
@@ -87,7 +88,10 @@ export default function RankingsPage() {
                   </td>
 
                   <td className="text-xs text-slate-400">
-                    <span>{u.country}</span>
+                    <span className="inline-flex items-center gap-1">
+                      <span>{getCountryFlag(u.country)}</span>
+                      <span>{u.country}</span>
+                    </span>
                     {u.university && <span className="text-slate-500"> • {u.university}</span>}
                   </td>
 

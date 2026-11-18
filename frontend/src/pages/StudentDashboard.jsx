@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export default function StudentDashboard() {
-  const { currentUser } = useApp();
+  const { currentUser, blogs } = useApp();
   const navigate = useNavigate();
 
   const user = currentUser || mockData.users[0];
@@ -40,35 +40,9 @@ export default function StudentDashboard() {
     }
   };
 
-  const adminBlogs = [
-    {
-      id: 'blog-1',
-      author: 'admin',
-      title: 'CodeArena Global Round 42: Editorial, Problem Analysis & Final Results',
-      date: 'Today at 14:30',
-      summary:
-        'Complete solution breakdown for problems A through F is now live. Thank you to all 4,210 participants! Official rating changes are being computed and updated.',
-      commentsCount: 142,
-    },
-    {
-      id: 'blog-2',
-      author: 'admin',
-      title: 'ICPC Winter Training Qualifier 2026: Team Registration Schedule',
-      date: 'Nov 08, 2026',
-      summary:
-        'Official registration is now open for university teams preparing for regional contests. Includes 5-hour mirror rounds with ICPC penalty rules.',
-      commentsCount: 89,
-    },
-    {
-      id: 'blog-3',
-      author: 'admin',
-      title: 'Judge System Performance Upgrade: GCC 14 with C++23 Support',
-      date: 'Nov 02, 2026',
-      summary:
-        'Judge sandboxes have upgraded to standard C++23. Memory limit overhead reduced and execution limits on heavy tree queries adjusted.',
-      commentsCount: 64,
-    },
-  ];
+  const adminBlogs = (blogs && blogs.length > 0 ? blogs : mockData.blogs || []).filter(
+    (b) => b.status === 'approved'
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
@@ -166,7 +140,9 @@ export default function StudentDashboard() {
               <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 Official Announcements &amp; Editorials
               </h2>
-              <span className="text-[11px] text-slate-500 font-mono">Platform Feed</span>
+              <Link to="/blogs" className="text-[11px] text-blue-400 hover:underline font-mono">
+                View All Blogs &rarr;
+              </Link>
             </div>
 
             <div className="space-y-4">
@@ -186,22 +162,28 @@ export default function StudentDashboard() {
                     <span className="font-mono text-[11px] text-slate-500">#{blog.id}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-white hover:text-blue-400 cursor-pointer transition leading-snug">
+                  <Link
+                    to={`/blogs/${blog.id}`}
+                    className="text-base font-bold text-white hover:text-blue-400 transition leading-snug block"
+                  >
                     {blog.title}
-                  </h3>
+                  </Link>
 
                   <p className="text-xs text-slate-400 leading-relaxed">
                     {blog.summary}
                   </p>
 
                   <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                    <span className="text-blue-400 hover:underline cursor-pointer font-medium flex items-center space-x-1">
+                    <Link
+                      to={`/blogs/${blog.id}`}
+                      className="text-blue-400 hover:underline font-medium flex items-center space-x-1"
+                    >
                       <span>Read Editorial Discussion</span>
                       <ArrowRight size={12} />
-                    </span>
+                    </Link>
                     <span className="flex items-center space-x-1 text-slate-500">
                       <MessageSquare size={13} />
-                      <span>{blog.commentsCount} comments</span>
+                      <span>{blog.commentsCount || (blog.comments || []).length} comments</span>
                     </span>
                   </div>
                 </div>

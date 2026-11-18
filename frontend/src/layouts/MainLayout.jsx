@@ -61,6 +61,8 @@ export default function MainLayout() {
                   { to: '/contests', label: 'Contests' },
                   { to: '/problems', label: 'Problemset' },
                   { to: '/rankings', label: 'Standings' },
+                  { to: '/blogs', label: 'Blogs' },
+                  { to: '/contribute', label: 'Contribute' },
                   { to: `/profile/${currentUser?.username || 'tourist'}`, label: 'Profile' },
                 ].map((item) => (
                   <NavLink

@@ -6,7 +6,7 @@ export const users = [
     username: 'tourist',
     displayName: 'Gennady Korotkevich',
     email: 'tourist@cp.dev',
-    avatar: null,
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     country: 'Belarus',
     flag: '🇧🇾',
     university: 'ITMO University',
@@ -19,13 +19,15 @@ export const users = [
     streak: 47,
     joinedDate: '2019-03-15',
     rankChange: 0,
+    friends: ['jiangly', 'ksun48', 'Um_nik', 'Benq', 'Radewoosh'],
+    followers: ['jiangly', 'ksun48', 'Um_nik', 'Benq', 'ecnerwala', 'Radewoosh', 'prof_algorithms'],
   },
   {
     id: 'u2',
     username: 'jiangly',
     displayName: 'Lingyu Jiang',
     email: 'jiangly@cp.dev',
-    avatar: null,
+    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
     country: 'China',
     flag: '🇨🇳',
     university: 'Tsinghua University',
@@ -38,6 +40,8 @@ export const users = [
     streak: 31,
     joinedDate: '2020-01-10',
     rankChange: 1,
+    friends: ['tourist', 'ecnerwala', 'Benq', 'ksun48'],
+    followers: ['tourist', 'ksun48', 'Um_nik', 'Benq'],
   },
   {
     id: 'u3',
@@ -45,7 +49,7 @@ export const users = [
     displayName: 'Kevin Sun',
     email: 'ksun48@cp.dev',
     avatar: null,
-    country: 'USA',
+    country: 'United States',
     flag: '🇺🇸',
     university: 'MIT',
     rating: 3703,
@@ -57,6 +61,8 @@ export const users = [
     streak: 19,
     joinedDate: '2018-09-01',
     rankChange: -1,
+    friends: ['tourist', 'Benq', 'ecnerwala'],
+    followers: ['tourist', 'jiangly', 'Um_nik'],
   },
   {
     id: 'u4',
@@ -76,6 +82,8 @@ export const users = [
     streak: 24,
     joinedDate: '2017-11-20',
     rankChange: 0,
+    friends: ['tourist', 'Radewoosh'],
+    followers: ['tourist', 'jiangly', 'Benq'],
   },
   {
     id: 'u5',
@@ -83,7 +91,7 @@ export const users = [
     displayName: 'Benjamin Qi',
     email: 'benq@cp.dev',
     avatar: null,
-    country: 'USA',
+    country: 'United States',
     flag: '🇺🇸',
     university: 'MIT',
     rating: 3579,
@@ -95,6 +103,8 @@ export const users = [
     streak: 15,
     joinedDate: '2019-06-12',
     rankChange: 2,
+    friends: ['tourist', 'ksun48', 'ecnerwala'],
+    followers: ['tourist', 'jiangly', 'ksun48'],
   },
   {
     id: 'u6',
@@ -102,7 +112,7 @@ export const users = [
     displayName: 'Andrew He',
     email: 'ecnerwala@cp.dev',
     avatar: null,
-    country: 'USA',
+    country: 'United States',
     flag: '🇺🇸',
     university: 'MIT',
     rating: 3498,
@@ -114,6 +124,8 @@ export const users = [
     streak: 8,
     joinedDate: '2018-04-18',
     rankChange: 0,
+    friends: ['tourist', 'jiangly', 'Benq'],
+    followers: ['jiangly', 'ksun48', 'Benq'],
   },
   {
     id: 'u7',
@@ -133,6 +145,8 @@ export const users = [
     streak: 12,
     joinedDate: '2017-08-30',
     rankChange: -1,
+    friends: ['tourist', 'Um_nik'],
+    followers: ['tourist', 'Um_nik'],
   },
   {
     id: 'u8',
@@ -159,7 +173,7 @@ export const users = [
     displayName: 'Neal Wu',
     email: 'neal@cp.dev',
     avatar: null,
-    country: 'USA',
+    country: 'United States',
     flag: '🇺🇸',
     university: 'Harvard University',
     rating: 2944,
@@ -249,6 +263,8 @@ export const users = [
     rankChange: 0,
     totalStudents: 234,
     coursesCreated: 5,
+    friends: ['tourist', 'Petar_CP', 'jiangly'],
+    followers: ['tourist', 'Petar_CP'],
   },
   {
     id: 'u14',
@@ -268,6 +284,8 @@ export const users = [
     streak: 6,
     joinedDate: '2021-03-11',
     rankChange: -1,
+    friends: ['tourist', 'prof_algorithms'],
+    followers: ['prof_algorithms', 'tourist'],
   },
   {
     id: 'u15',
@@ -275,7 +293,7 @@ export const users = [
     displayName: 'Alex Rivera',
     email: 'alex@cp.dev',
     avatar: null,
-    country: 'USA',
+    country: 'United States',
     flag: '🇺🇸',
     university: 'UC Berkeley',
     rating: 1200,
@@ -709,7 +727,7 @@ export const contestStandings = [
     rank: 3,
     userId: 'u3',
     username: 'ksun48',
-    country: 'USA',
+    country: 'United States',
     rating: 3703,
     solved: 4,
     penalty: 198,
@@ -1053,54 +1071,143 @@ export const submissions = [
   {
     id: 'sub-101',
     userId: 'u1',
+    username: 'tourist',
     problemId: '1A',
     problemTitle: 'Two Sum Optimization',
     verdict: 'AC',
     language: 'C++',
     time: 78,
     memory: 14.2,
-    code: '#include <bits/stdc++.h>\nusing namespace std;\nint main() { ... }',
+    code: `#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n, target;
+    if (!(cin >> n >> target)) return 0;
+    vector<int> a(n);
+    unordered_map<int, int> mp;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        int complement = target - a[i];
+        if (mp.count(complement)) {
+            cout << mp[complement] << " " << i << "\n";
+            return 0;
+        }
+        mp[a[i]] = i;
+    }
+    cout << "-1 -1\n";
+    return 0;
+}`,
     submittedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
     passedTests: '10/10',
   },
   {
     id: 'sub-102',
     userId: 'u1',
-    problemId: '3A',
-    problemTitle: 'Segment Tree Range Update & Sum',
-    verdict: 'AC',
+    username: 'tourist',
+    problemId: '2A',
+    problemTitle: 'Graph Connectivity Queries',
+    verdict: 'QUEUE',
     language: 'C++',
-    time: 245,
-    memory: 38.6,
-    code: '#include <bits/stdc++.h>\nusing namespace std;\nint main() { ... }',
-    submittedAt: new Date(Date.now() - 3600000 * 5).toISOString(),
-    passedTests: '25/25',
+    time: 0,
+    memory: 0,
+    code: `#include <bits/stdc++.h>
+using namespace std;
+
+struct DSU {
+    vector<int> p, r;
+    DSU(int n) : p(n), r(n, 0) { iota(p.begin(), p.end(), 0); }
+    int find(int x) { return p[x] == x ? x : p[x] = find(p[x]); }
+    bool unite(int x, int y) {
+        x = find(x); y = find(y);
+        if (x == y) return false;
+        if (r[x] < r[y]) swap(x, y);
+        p[y] = x;
+        if (r[x] == r[y]) r[x]++;
+        return true;
+    }
+};
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+    int n, m; cin >> n >> m;
+    DSU d(n + 1);
+    while (m--) {
+        int t, u, v; cin >> t >> u >> v;
+        if (t == 1) d.unite(u, v);
+        else cout << (d.find(u) == d.find(v) ? "YES\\n" : "NO\\n");
+    }
+    return 0;
+}`,
+    submittedAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+    passedTests: 'Testing on test 14...',
   },
   {
     id: 'sub-103',
     userId: 'u1',
+    username: 'tourist',
+    problemId: '3A',
+    problemTitle: 'Segment Tree Range Update & Sum',
+    verdict: 'WA',
+    language: 'C++',
+    time: 245,
+    memory: 38.6,
+    code: `#include <bits/stdc++.h>
+using namespace std;
+// Segment tree off-by-one bug on query boundary
+int main() {
+    cout << "WA on test 7\n";
+    return 0;
+}`,
+    submittedAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+    passedTests: '6/25',
+  },
+  {
+    id: 'sub-104',
+    userId: 'u1',
+    username: 'tourist',
     problemId: '2B',
     problemTitle: 'Subarray Maximum GCD',
     verdict: 'WA',
     language: 'Python',
     time: 420,
     memory: 22.1,
-    code: 'import sys\n# gcd snippet',
+    code: 'import math\ndef solve(): pass',
     submittedAt: new Date(Date.now() - 3600000 * 12).toISOString(),
     passedTests: '8/20',
   },
   {
-    id: 'sub-104',
+    id: 'sub-105',
     userId: 'u1',
-    problemId: '4B',
-    problemTitle: 'Dynamic Programming Convex Hull Trick',
+    username: 'tourist',
+    problemId: '5A',
+    problemTitle: 'Suffix Array & LCP',
     verdict: 'TLE',
     language: 'C++',
     time: 2000,
     memory: 45.1,
-    code: '// O(N^2) brute force',
-    submittedAt: new Date(Date.now() - 3600000 * 28).toISOString(),
-    passedTests: '14/30',
+    code: '// O(N^2 log N) string sort',
+    submittedAt: new Date(Date.now() - 3600000 * 20).toISOString(),
+    passedTests: '12/40',
+  },
+  {
+    id: 'sub-106',
+    userId: 'u1',
+    username: 'tourist',
+    problemId: '4B',
+    problemTitle: 'Dynamic Programming Convex Hull Trick',
+    verdict: 'AC',
+    language: 'C++',
+    time: 140,
+    memory: 18.3,
+    code: `#include <bits/stdc++.h>
+using namespace std;
+// Optimal CHT
+int main() { return 0; }`,
+    submittedAt: new Date(Date.now() - 3600000 * 48).toISOString(),
+    passedTests: '30/30',
   },
 ];
 
@@ -1169,6 +1276,279 @@ export const notifications = [
   { id: 'notif-3', type: 'assignment', title: 'New Assignment Posted', body: 'Dr. Ahmed Hassan assigned Problem Set 1: Two Pointers & Binary Search.', read: true, createdAt: new Date(Date.now() - 86400000 * 2).toISOString() },
 ];
 
+export const blogs = [
+  {
+    id: 'blog-1',
+    author: 'admin',
+    authorRating: 3000,
+    authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    title: 'CodeArena Global Round 42: Editorial, Problem Analysis & Final Results',
+    date: 'Today at 14:30',
+    category: 'Editorials',
+    tags: ['editorial', 'round-42', 'solutions', 'div1', 'div2'],
+    summary:
+      'Complete solution breakdown for problems A through E is now live. Thank you to all 4,210 participants! Official rating changes are computed.',
+    status: 'approved',
+    commentsCount: 142,
+    content: `
+# CodeArena Global Round 42 — Editorial & Detailed Problem Analysis
+
+We hope you enjoyed **CodeArena Global Round 42**! The contest featured 5 algorithmic challenges testing a variety of paradigms from greedy optimizations to advanced tree structures.
+
+---
+
+### Problem A — Two Sum Optimization
+- **Time Complexity:** $\\mathcal{O}(N)$ or $\\mathcal{O}(N \\log N)$
+- **Key Idea:** Store elements in a hash map or sort the array and use the two-pointer technique.
+- **Approach:** As we iterate through index $i$, check if $T - A[i]$ has already been inserted in our hash map. If so, return the pair. Otherwise, insert $A[i] \\to i$.
+
+\`\`\`cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n, target;
+    cin >> n >> target;
+    unordered_map<int, int> mp;
+    for (int i = 0; i < n; i++) {
+        int x; cin >> x;
+        if (mp.count(target - x)) {
+            cout << mp[target - x] << " " << i << "\\n";
+            return 0;
+        }
+        mp[x] = i;
+    }
+    cout << "-1 -1\\n";
+}
+\`\`\`
+
+---
+
+### Problem B — Graph Connectivity Queries
+- **Time Complexity:** $\\mathcal{O}((N + M) \\alpha(N))$
+- **Key Idea:** Disjoint Set Union (DSU) with union by rank and path compression.
+- **Approach:** For type 1 queries, call \`unite(u, v)\`. For type 2 queries, compare \`find(u) == find(v)\`.
+
+---
+
+### Problem C — Segment Tree Range Update & Sum
+- **Time Complexity:** $\\mathcal{O}((N + Q) \\log N)$
+- **Key Idea:** Segment tree with lazy propagation.
+- **Approach:** Maintain a lazy tag for pending range additions. When traversing a node, push down the lazy tag to both children before descending.
+
+---
+
+### Problem D — Knapsack Bounded Items
+- **Time Complexity:** $\\mathcal{O}(N \\times W)$
+- **Key Idea:** Binary splitting of quantities or sliding window monotonic queue optimization on remainders modulo $w_i$.
+
+---
+
+### Problem E — Suffix Array & LCP
+- **Time Complexity:** $\\mathcal{O}(N \\log N)$
+- **Key Idea:** Construct Suffix Array using doubling algorithm with radix sort, then compute Kasai's algorithm for LCP in $\\mathcal{O}(N)$.
+    `,
+    comments: [
+      {
+        id: 'c1',
+        author: 'jiangly',
+        authorRating: 3741,
+        date: '2 hours ago',
+        text: 'Clean problemset! Loved Problem D. Monotonic queue optimization on knapsack remainders is always a classic.',
+        upvotes: 48,
+      },
+      {
+        id: 'c2',
+        author: 'Um_nik',
+        authorRating: 3614,
+        date: '1 hour ago',
+        text: 'Problem C had tight constant factor limits for Python solutions, C++ passed very comfortably in 245ms.',
+        upvotes: 29,
+      },
+      {
+        id: 'c3',
+        author: 'ksun48',
+        authorRating: 3703,
+        date: '35 minutes ago',
+        text: 'Thanks for the fast editorial! Rating updates look solid.',
+        upvotes: 19,
+      },
+    ],
+  },
+  {
+    id: 'blog-2',
+    author: 'admin',
+    authorRating: 3000,
+    authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    title: 'ICPC Winter Training Qualifier 2026: Team Registration Schedule',
+    date: 'Nov 08, 2026',
+    category: 'Announcements',
+    tags: ['icpc', 'training', 'contest', 'teams'],
+    summary:
+      'Official registration is now open for university teams preparing for regional contests. Includes 5-hour mirror rounds with ICPC penalty rules.',
+    status: 'approved',
+    commentsCount: 89,
+    content: `
+# ICPC Winter Training Qualifier 2026
+
+We are thrilled to announce the official **ICPC Winter Training Qualifier** hosted on CodeArena!
+
+### Format & Eligibility:
+- **Teams:** 3 eligible university students per team with 1 computer.
+- **Duration:** 5 hours (12 to 14 algorithmic problems).
+- **Rule Set:** ICPC standard penalty (20-minute penalty per rejected submission for problems eventually solved).
+- **Scoreboard:** Live freeze at hour 4.
+
+Register your team roster through your university profile before November 25, 2026.
+    `,
+    comments: [
+      {
+        id: 'c4',
+        author: 'Petar_CP',
+        authorRating: 2100,
+        date: 'Nov 09, 2026',
+        text: 'Will there be an individual mirror round for solo practice?',
+        upvotes: 14,
+      },
+    ],
+  },
+  {
+    id: 'blog-3',
+    author: 'admin',
+    authorRating: 3000,
+    authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    title: 'Judge System Performance Upgrade: GCC 14 with C++23 Support',
+    date: 'Nov 02, 2026',
+    category: 'Platform',
+    tags: ['judge', 'cpp23', 'infrastructure', 'updates'],
+    summary:
+      'Judge sandboxes have upgraded to standard C++23. Memory limit overhead reduced and execution limits on heavy tree queries adjusted.',
+    status: 'approved',
+    commentsCount: 64,
+    content: `
+# Judge System Infrastructure Update: GCC 14 + C++23
+
+Our cluster nodes have been upgraded to provide smoother compilation and consistent hardware benchmarking.
+
+### Changes:
+1. **Compiler:** GNU C++23 (\`g++ -O3 -std=c++23 -march=x86-64-v3\`).
+2. **Standard Library:** Full support for \`std::print\`, \`std::views\`, and \`std::expected\`.
+3. **Sandbox:** Reduced virtual memory overhead by 4MB per submission container.
+    `,
+    comments: [],
+  },
+  {
+    id: 'blog-4',
+    author: 'tourist',
+    authorRating: 3822,
+    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    title: 'Advanced Graph Theory: Dominator Tree & Lengauer-Tarjan In Practice',
+    date: 'Oct 25, 2026',
+    category: 'Tutorials',
+    tags: ['graphs', 'dfs', 'advanced', 'algorithms'],
+    summary:
+      'A deep dive into Lengauer-Tarjan algorithm for finding dominator trees in directed graphs and practical CP applications.',
+    status: 'approved',
+    commentsCount: 96,
+    content: `
+# Dominator Trees & The Lengauer-Tarjan Algorithm
+
+In flowgraphs, a node $d$ dominates node $n$ if every path from entry to $n$ must pass through $d$.
+This tutorial explores how to compute the immediate dominator of every node in $\\mathcal{O}((V + E) \\alpha(V))$ or near-linear time using semidominators.
+    `,
+    comments: [],
+  },
+  {
+    id: 'blog-5',
+    author: 'jiangly',
+    authorRating: 3741,
+    authorAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+    title: 'Fast Walsh-Hadamard Transform (FWHT) for Bitwise XOR Convolutions',
+    date: '1 hour ago',
+    category: 'Tutorials',
+    tags: ['math', 'fwht', 'bitmasks'],
+    summary:
+      'How to compute bitwise XOR subset sum convolutions in O(N log N) using FWHT and linear transformations.',
+    status: 'pending',
+    commentsCount: 0,
+    content: `
+# Fast Walsh-Hadamard Transform (FWHT)
+
+Given two sequences $A$ and $B$, their XOR convolution is defined as $C_k = \\sum_{i \\oplus j = k} A_i B_j$.
+Just as FFT computes multiplication in frequency domain for index addition $(i + j = k)$, FWHT diagonalizes bitwise operations $(\\oplus, \\land, \\lor)$ in $\\mathcal{O}(N \\log N)$.
+    `,
+    comments: [],
+  },
+];
+
+export const contributedDivs = [
+  {
+    id: 'div-contrib-1',
+    name: 'CodeArena Round #921 (Div. 2)',
+    divLevel: 'Div. 2',
+    author: 'tourist',
+    authorRating: 3822,
+    duration: '2 hours',
+    scheduledDate: '2026-11-22 17:35',
+    description: 'Targeted at rated participants with rating < 2100. 5 balanced algorithmic challenges ranging from 800 to 2200.',
+    problems: ['1A', '2A', '2B', '3A', '4A'],
+    status: 'pending',
+    submittedAt: 'Today at 15:40',
+  },
+  {
+    id: 'div-contrib-2',
+    name: 'Algorithmic Speed Warm-up (Div. 3)',
+    divLevel: 'Div. 3',
+    author: 'prof_algorithms',
+    authorRating: 2100,
+    duration: '2 hours',
+    scheduledDate: '2026-11-25 14:00',
+    description: 'Beginner-friendly round for participants with rating < 1600. Focus on greedy, ad-hoc, and sorting.',
+    problems: ['1A', '1B', '2A'],
+    status: 'pending',
+    submittedAt: 'Nov 16, 2026',
+  },
+];
+
+export const contributedProblems = [
+  {
+    id: 'cp-contrib-1',
+    title: 'Bitwise XOR Subtree Queries',
+    author: 'tourist',
+    authorRating: 3822,
+    difficulty: 1900,
+    divLevel: 'Div. 2',
+    tags: ['trees', 'dfs and similar', 'bitmasks', 'data structures'],
+    timeLimit: '1.5s',
+    memoryLimit: '256MB',
+    statement: 'Given a tree with N vertices, each with an integer value. Process Q queries: calculate XOR sum of all values in subtree of vertex v.',
+    inputFormat: 'The first line contains N and Q (1 <= N, Q <= 200,000). The next line contains N integers...',
+    outputFormat: 'For each query, output the answer on a new line.',
+    sampleInput: '5 3\n1 2 3 4 5\n1 2\n1 3\n2 4\n2 5\n1\n2\n3',
+    sampleOutput: '1\n3\n3',
+    status: 'pending',
+    submittedAt: 'Today at 16:30',
+  },
+  {
+    id: 'cp-contrib-2',
+    title: 'Palindromic Substring Hashing with Wildcards',
+    author: 'prof_algorithms',
+    authorRating: 2100,
+    difficulty: 2200,
+    divLevel: 'Div. 1',
+    tags: ['strings', 'hashing', 'dynamic programming'],
+    timeLimit: '2.0s',
+    memoryLimit: '512MB',
+    statement: 'Given a string containing letters and up to 2 wildcard characters "?", count the number of distinct palindromic substrings.',
+    inputFormat: 'A single string S of length up to 100,000.',
+    outputFormat: 'Output single integer: count of distinct palindromic substrings modulo 10^9 + 7.',
+    sampleInput: 'a?b?a',
+    sampleOutput: '9',
+    status: 'pending',
+    submittedAt: 'Yesterday at 11:20',
+  },
+];
+
 export default {
   users,
   problems,
@@ -1182,4 +1562,7 @@ export default {
   achievements,
   classrooms,
   notifications,
+  blogs,
+  contributedDivs,
+  contributedProblems,
 };

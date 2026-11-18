@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import mockData from '../data/mockData';
 import { useSubmission } from '../hooks/useSubmission';
+import { useApp } from '../context/AppContext';
 import { getRatingColor } from '../utils/helpers';
-import { Play, Send, ChevronLeft, Clock, HardDrive, Check, Copy } from 'lucide-react';
+import { Play, Send, ChevronLeft, Clock, HardDrive, Check, Copy, Bookmark, Star } from 'lucide-react';
 
 export default function ProblemDetailPage() {
   const { id } = useParams();
-  const problem = mockData.problems.find((p) => p.id === id) || mockData.problems[0];
+  const { favorites, toggleFavorite, problems: customProblems } = useApp();
+  const allProblems = customProblems?.length ? customProblems : mockData.problems;
+  const problem = allProblems.find((p) => p.id === id) || mockData.problems[0];
+  const isFavorite = favorites?.includes(problem.id);
 
   const [language, setLanguage] = useState('C++');
   const [code, setCode] = useState(
@@ -83,18 +87,33 @@ int main() {
         
         {/* Left Side: Statement */}
         <div className="cp-card p-6 space-y-6 text-slate-300 leading-relaxed text-sm">
-          <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">
-              {problem.id}. {problem.title}
-            </h1>
-            <div className="flex items-center space-x-3 mt-1.5 text-xs">
-              <span className="text-slate-400">Rating:</span>
-              <span className={`font-mono font-bold ${getRatingColor(problem.rating)}`}>
-                {problem.rating}
-              </span>
-              <span className="text-slate-600">•</span>
-              <span className="text-slate-400">Tags: {problem.tags.join(', ')}</span>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h1 className="text-xl font-bold text-white tracking-tight">
+                {problem.id}. {problem.title}
+              </h1>
+              <div className="flex items-center space-x-3 mt-1.5 text-xs">
+                <span className="text-slate-400">Rating:</span>
+                <span className={`font-mono font-bold ${getRatingColor(problem.rating)}`}>
+                  {problem.rating}
+                </span>
+                <span className="text-slate-600">•</span>
+                <span className="text-slate-400">Tags: {problem.tags.join(', ')}</span>
+              </div>
             </div>
+
+            <button
+              onClick={() => toggleFavorite(problem.id)}
+              className={`p-2 rounded-lg border transition flex items-center space-x-1.5 text-xs font-semibold ${
+                isFavorite
+                  ? 'bg-amber-500/15 text-amber-400 border-amber-500/30'
+                  : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700'
+              }`}
+              title={isFavorite ? 'Remove from favorites' : 'Add to favorite problems'}
+            >
+              <Star size={15} fill={isFavorite ? 'currentColor' : 'none'} />
+              <span>{isFavorite ? 'Favorited' : 'Favorite'}</span>
+            </button>
           </div>
 
           {/* Statement body */}
