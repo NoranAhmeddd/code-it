@@ -1,31 +1,32 @@
-import React, { Suspense, lazy } from 'react';
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import { AppProvider } from './context/AppContext';
-import MainLayout from './layouts/MainLayout';
+import React, { Suspense, lazy } from "react";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { AppProvider } from "./app/context/AppContext";
+import MainLayout from "./app/layouts/MainLayout";
 
-// Lazy load all pages for optimal bundle and load performance
-const StudentDashboard = lazy(() => import('./pages/StudentDashboard'));
-const ProblemsPage = lazy(() => import('./pages/ProblemsPage'));
-const ProblemDetailPage = lazy(() => import('./pages/ProblemDetailPage'));
-const ContestsPage = lazy(() => import('./pages/ContestsPage'));
-const ContestDetailPage = lazy(() => import('./pages/ContestDetailPage'));
-const CoursesPage = lazy(() => import('./pages/CoursesPage'));
-const CourseDetailPage = lazy(() => import('./pages/CourseDetailPage'));
-const LessonPage = lazy(() => import('./pages/LessonPage'));
-const AssignmentsPage = lazy(() => import('./pages/AssignmentsPage'));
-const AssignmentDetailPage = lazy(() => import('./pages/AssignmentDetailPage'));
-const RankingsPage = lazy(() => import('./pages/RankingsPage'));
-const UserProfilePage = lazy(() => import('./pages/UserProfilePage'));
-const TeacherDashboard = lazy(() => import('./pages/TeacherDashboard'));
-const TeacherCoursesPage = lazy(() => import('./pages/TeacherCoursesPage'));
-const TeacherAssignmentsPage = lazy(() => import('./pages/TeacherAssignmentsPage'));
-const TeacherStudentsPage = lazy(() => import('./pages/TeacherStudentsPage'));
-const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
-const ClassroomPage = lazy(() => import('./pages/ClassroomPage'));
-const BlogsPage = lazy(() => import('./pages/BlogsPage'));
-const ContributePage = lazy(() => import('./pages/ContributePage'));
+// Lazy load all pages for optimal bundle and initial load speed
+const StudentDashboard = lazy(() => import("./app/pages/StudentDashboard"));
+const ProblemsPage = lazy(() => import("./app/pages/ProblemsPage"));
+const ProblemDetailPage = lazy(() => import("./app/pages/ProblemDetailPage"));
+const ContestsPage = lazy(() => import("./app/pages/ContestsPage"));
+const ContestDetailPage = lazy(() => import("./app/pages/ContestDetailPage"));
+const CoursesPage = lazy(() => import("./app/pages/CoursesPage"));
+const CourseDetailPage = lazy(() => import("./app/pages/CourseDetailPage"));
+const LessonPage = lazy(() => import("./app/pages/LessonPage"));
+const AssignmentsPage = lazy(() => import("./app/pages/AssignmentsPage"));
+const AssignmentDetailPage = lazy(() => import("./app/pages/AssignmentDetailPage"));
+const RankingsPage = lazy(() => import("./app/pages/RankingsPage"));
+const UserProfilePage = lazy(() => import("./app/pages/UserProfilePage"));
+const TeacherDashboard = lazy(() => import("./app/pages/TeacherDashboard"));
+const TeacherCoursesPage = lazy(() => import("./app/pages/TeacherCoursesPage"));
+const TeacherAssignmentsPage = lazy(() => import("./app/pages/TeacherAssignmentsPage"));
+const TeacherStudentsPage = lazy(() => import("./app/pages/TeacherStudentsPage"));
+const AdminDashboard = lazy(() => import("./app/pages/AdminDashboard"));
+const ClassroomPage = lazy(() => import("./app/pages/ClassroomPage"));
+const BlogsPage = lazy(() => import("./app/pages/BlogsPage"));
+const ContributePage = lazy(() => import("./app/pages/ContributePage"));
+const LandingPage = lazy(() => import("./app/pages/LandingPage"));
 
-// Fallback Loading Screen
+// Lightweight Fallback Loading Spinner
 function PageLoader() {
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center space-y-4">
@@ -38,18 +39,23 @@ function PageLoader() {
 }
 
 const router = createBrowserRouter([
-  // Open the dark competitive dashboard by default.
   {
-    path: '/',
+    path: "/",
     element: <Navigate to="/dashboard" replace />,
   },
-
-  // Main Authenticated Application Routes (inside MainLayout)
+  {
+    path: "/landing",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <LandingPage />
+      </Suspense>
+    ),
+  },
   {
     element: <MainLayout />,
     children: [
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: (
           <Suspense fallback={<PageLoader />}>
             <StudentDashboard />
@@ -57,7 +63,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/problems',
+        path: "/problems",
         element: (
           <Suspense fallback={<PageLoader />}>
             <ProblemsPage />
@@ -65,7 +71,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/problems/:id',
+        path: "/problems/:id",
         element: (
           <Suspense fallback={<PageLoader />}>
             <ProblemDetailPage />
@@ -73,7 +79,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/contests',
+        path: "/contests",
         element: (
           <Suspense fallback={<PageLoader />}>
             <ContestsPage />
@@ -81,7 +87,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/contests/:id',
+        path: "/contests/:id",
         element: (
           <Suspense fallback={<PageLoader />}>
             <ContestDetailPage />
@@ -89,7 +95,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/courses',
+        path: "/courses",
         element: (
           <Suspense fallback={<PageLoader />}>
             <CoursesPage />
@@ -97,7 +103,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/courses/:id',
+        path: "/courses/:id",
         element: (
           <Suspense fallback={<PageLoader />}>
             <CourseDetailPage />
@@ -105,7 +111,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/courses/:courseId/lessons/:lessonId',
+        path: "/courses/:courseId/lessons/:lessonId",
         element: (
           <Suspense fallback={<PageLoader />}>
             <LessonPage />
@@ -113,7 +119,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/assignments',
+        path: "/assignments",
         element: (
           <Suspense fallback={<PageLoader />}>
             <AssignmentsPage />
@@ -121,7 +127,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/assignments/:id',
+        path: "/assignments/:id",
         element: (
           <Suspense fallback={<PageLoader />}>
             <AssignmentDetailPage />
@@ -129,7 +135,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/rankings',
+        path: "/rankings",
         element: (
           <Suspense fallback={<PageLoader />}>
             <RankingsPage />
@@ -137,7 +143,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/blogs',
+        path: "/blogs",
         element: (
           <Suspense fallback={<PageLoader />}>
             <BlogsPage />
@@ -145,7 +151,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/blogs/:id',
+        path: "/blogs/:id",
         element: (
           <Suspense fallback={<PageLoader />}>
             <BlogsPage />
@@ -153,7 +159,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/contribute',
+        path: "/contribute",
         element: (
           <Suspense fallback={<PageLoader />}>
             <ContributePage />
@@ -161,17 +167,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/profile/:username',
+        path: "/profile/:username",
         element: (
           <Suspense fallback={<PageLoader />}>
             <UserProfilePage />
           </Suspense>
         ),
       },
-
-      // Teacher Portal
       {
-        path: '/teacher',
+        path: "/teacher",
         element: (
           <Suspense fallback={<PageLoader />}>
             <TeacherDashboard />
@@ -179,7 +183,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/teacher/courses',
+        path: "/teacher/courses",
         element: (
           <Suspense fallback={<PageLoader />}>
             <TeacherCoursesPage />
@@ -187,7 +191,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/teacher/assignments',
+        path: "/teacher/assignments",
         element: (
           <Suspense fallback={<PageLoader />}>
             <TeacherAssignmentsPage />
@@ -195,17 +199,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/teacher/students',
+        path: "/teacher/students",
         element: (
           <Suspense fallback={<PageLoader />}>
             <TeacherStudentsPage />
           </Suspense>
         ),
       },
-
-      // Admin & Classroom
       {
-        path: '/admin',
+        path: "/admin",
         element: (
           <Suspense fallback={<PageLoader />}>
             <AdminDashboard />
@@ -213,17 +215,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/classroom',
+        path: "/classroom",
         element: (
           <Suspense fallback={<PageLoader />}>
             <ClassroomPage />
           </Suspense>
         ),
       },
-
-      // Catch-all redirect to dashboard
       {
-        path: '*',
+        path: "*",
         element: <Navigate to="/dashboard" replace />,
       },
     ],
